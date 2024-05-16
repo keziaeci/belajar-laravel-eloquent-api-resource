@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -30,4 +31,8 @@ Route::get('categories', function () {
     return CategoryResource::collection($categories);
 });
 
-
+// resource collection custom akan membuat file class baru, dan kita bisa leluasa menambah attribut data
+Route::get('categories-custom', function () {
+    $categories = Category::all();
+    return new CategoryCollection($categories);
+});
