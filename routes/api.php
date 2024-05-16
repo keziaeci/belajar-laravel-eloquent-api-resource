@@ -2,7 +2,9 @@
 
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\ProductResource;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +26,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('categories/{id}', function ($id) {
     $category = Category::findOrFail($id);
     return new CategoryResource($category);
+});
+
+Route::get('products/{id}', function ($id) {
+    $prod = Product::findOrFail($id);
+    return new ProductResource($prod);
 });
 
 Route::get('categories', function () {
