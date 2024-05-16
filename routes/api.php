@@ -2,6 +2,7 @@
 
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
@@ -31,6 +32,11 @@ Route::get('categories/{id}', function ($id) {
 Route::get('products/{id}', function ($id) {
     $prod = Product::findOrFail($id);
     return new ProductResource($prod);
+});
+
+Route::get('products', function () {
+    $prod = Product::all();
+    return new ProductCollection($prod);
 });
 
 Route::get('categories', function () {

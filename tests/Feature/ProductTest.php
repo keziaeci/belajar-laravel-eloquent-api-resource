@@ -5,9 +5,9 @@ namespace Tests\Feature;
 use App\Models\Product;
 use Database\Seeders\CategorySeeder;
 use Database\Seeders\ProductSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+
+use function PHPUnit\Framework\assertContains;
 
 class ProductTest extends TestCase
 {
@@ -29,5 +29,20 @@ class ProductTest extends TestCase
                     'updated_at' => $p->updated_at->toJson(),
                 ]
             ]);
+    }
+
+    function testResourceCollectionWrap() {
+        $this->seed([CategorySeeder::class,ProductSeeder::class]);
+        $res = $this->get('api/products')->assertStatus(200);
+
+        $names = $res->json('data.*.name');
+        // dd($names);
+        for ($i=0; $i < 5; $i++) { 
+            assertContains("Product $i of Food", $names);
+        }
+
+        for ($i=0; $i < 5; $i++) { 
+            assertContains("Product $i of Good", $names);
+        }
     }
 }
