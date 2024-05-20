@@ -39,6 +39,13 @@ Route::get('products', function () {
     return new ProductCollection($prod);
 });
 
+Route::get('products-paging', function (Request $request) {
+    $page = $request->get('page', 1);
+
+    $prod = Product::paginate(2,page: $page);
+    return new ProductCollection($prod);
+});
+
 Route::get('categories', function () {
     $categories = Category::all();
     return CategoryResource::collection($categories);

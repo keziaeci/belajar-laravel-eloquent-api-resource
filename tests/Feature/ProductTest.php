@@ -8,6 +8,7 @@ use Database\Seeders\ProductSeeder;
 use Tests\TestCase;
 
 use function PHPUnit\Framework\assertContains;
+use function PHPUnit\Framework\assertNotNull;
 
 class ProductTest extends TestCase
 {
@@ -44,5 +45,14 @@ class ProductTest extends TestCase
         for ($i=0; $i < 5; $i++) { 
             assertContains("Product $i of Good", $names);
         }
+    }
+
+    function testProductPaging() {
+        $this->seed([CategorySeeder::class,ProductSeeder::class]);
+        $res = $this->get('api/products-paging')->assertStatus(200);
+
+        assertNotNull($res->json('links'));
+        assertNotNull($res->json('data'));
+        assertNotNull($res->json('meta'));
     }
 }
