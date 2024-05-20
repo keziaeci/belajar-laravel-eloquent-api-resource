@@ -12,7 +12,7 @@ use function PHPUnit\Framework\assertNotNull;
 
 class ProductTest extends TestCase
 {
-    function testResource() {
+    function testProduct() {
         $this->seed([CategorySeeder::class,ProductSeeder::class]);
         $p = Product::first();
         $this->get("/api/products/$p->id")
@@ -26,6 +26,7 @@ class ProductTest extends TestCase
                         'name' => $p->category->name,
                     ],
                     'price' => $p->price,
+                    'is_expensive' => $p->price > 1000,
                     'created_at' => $p->created_at->toJson(),
                     'updated_at' => $p->updated_at->toJson(),
                 ]

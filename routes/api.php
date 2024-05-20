@@ -32,6 +32,7 @@ Route::get('categories/{id}', function ($id) {
 
 Route::get('products/{id}', function ($id) {
     $prod = Product::findOrFail($id);
+    $prod->load('category');
     return new ProductResource($prod);
 });
 
