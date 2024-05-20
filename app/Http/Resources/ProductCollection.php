@@ -21,4 +21,8 @@ class ProductCollection extends ResourceCollection
             'data' => $this->collection,
         ];
     }
+
+    function withResponse(Request $request, \Illuminate\Http\JsonResponse $response) {
+        $response->header('X-Powered-By','Maria Regina');
+    }
 }

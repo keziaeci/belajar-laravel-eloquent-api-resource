@@ -17,6 +17,7 @@ class ProductTest extends TestCase
         $p = Product::first();
         $this->get("/api/products/$p->id")
             ->assertStatus(200)
+            ->assertHeader('X-Powered-By','Maria Regina')
             ->assertJson([
                 'value' => [
                     'id' => $p->id,
@@ -35,7 +36,9 @@ class ProductTest extends TestCase
 
     function testResourceCollectionWrap() {
         $this->seed([CategorySeeder::class,ProductSeeder::class]);
-        $res = $this->get('api/products')->assertStatus(200);
+        $res = $this->get('api/products')
+        ->assertStatus(200)
+        ->assertHeader('X-Powered-By','Maria Regina');
 
         $names = $res->json('data.*.name');
         // dd($names);
@@ -44,7 +47,7 @@ class ProductTest extends TestCase
         }
 
         for ($i=0; $i < 5; $i++) { 
-            assertContains("Product $i of Good", $names);
+            assertContains("Product $i of Gadget", $names);
         }
     }
 

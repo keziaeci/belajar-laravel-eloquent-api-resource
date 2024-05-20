@@ -33,7 +33,11 @@ Route::get('categories/{id}', function ($id) {
 Route::get('products/{id}', function ($id) {
     $prod = Product::findOrFail($id);
     $prod->load('category');
-    return new ProductResource($prod);
+    // return new ProductResource($prod);
+    // () itu artinya kita panggil productresource sebagai objek
+    return (new ProductResource($prod))
+    ->response()
+    ->header('X-Powered-By', 'Maria Regina');
 });
 
 Route::get('products', function () {
