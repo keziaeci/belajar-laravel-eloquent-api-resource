@@ -3,6 +3,7 @@
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductDebugResource;
 use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Product;
@@ -44,6 +45,11 @@ Route::get('products-paging', function (Request $request) {
 
     $prod = Product::paginate(2,page: $page);
     return new ProductCollection($prod);
+});
+
+Route::get('products-debug/{id}', function ($id) {
+    $prod = Product::findOrFail($id);
+    return new ProductDebugResource($prod);
 });
 
 Route::get('categories', function () {
