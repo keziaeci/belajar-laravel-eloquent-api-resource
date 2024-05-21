@@ -1,0 +1,27 @@
+{
+    "openapi":"3.0.2",
+    "info": {
+        "title":"API Resource Restful API",
+        "version":"1.0",
+        "description": "OpenAPI for this API",
+        "termsOfService": "https://keziaeci.netlify.app/",
+        "contact": {
+            "name": "Kezia Regina",
+            "email": "keziaeci@gmail.com",
+            "url": "https://keziaeci.netlify.app/"
+        },
+        "license": {
+            "name": "APACHE 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        }
+    },
+    "servers": [
+        {
+            "url":"https://127.0.0.1:8000/api",
+            "description": "Restful API",
+
+        }
+    ],
+    "paths": {
+    }
+}
